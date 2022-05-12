@@ -27,7 +27,7 @@
                 @foreach ($productos as $producto)
                     <tr>
                         <td class="text-center">
-                            {{ $producto->categoria->name }}
+                            {{ $producto->barcode }}
                         </td>
                         <td class="text-center">
                             {{ $producto->categoria->name }}
@@ -60,7 +60,7 @@
                         <td class="text-center">
                             {{ $producto->stock }}
                         </td>
-                        <td class="text-center font-bold">
+                        <td class="font-bold text-center">
                             <b>$</b>{{ number_format($producto->price, 2, '.', ',') }}
                         </td>
                         <td class="flex justify-end">
@@ -100,7 +100,9 @@
                     <x-jet-input-error for="producto.name"></x-jet-input-error>
                 </div>
                 <div>
-
+                    <x-jet-label>Precio:</x-jet-label>
+                    {!! Form::number('eprice', null, ['wire:model' => 'producto.barcode', 'placeholder' => 'Precio del producto']) !!}
+                    <x-jet-input-error for="producto.barcode"></x-jet-input-error>
                 </div>
                 <div>
                     <x-jet-label>Categoria:</x-jet-label>

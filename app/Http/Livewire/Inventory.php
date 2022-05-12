@@ -18,6 +18,7 @@ class Inventory extends Component
     protected $listeners = ['render' => 'render'];
 
     protected $rules = [
+        'producto.barcode' => 'required',
         'producto.name' => 'required',
         'producto.description' => 'required',
         'producto.stock' => 'required',

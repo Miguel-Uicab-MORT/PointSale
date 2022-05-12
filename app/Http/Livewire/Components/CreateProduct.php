@@ -11,10 +11,11 @@ class CreateProduct extends Component
 
     public $create = false;
     public $producto, $categorias, $statusList;
-    public $name, $description, $stock, $price, $status, $categoria_id;
+    public $name, $barcode, $description, $stock, $price, $status, $categoria_id;
 
     protected $rules = [
         'name' => 'required',
+        'barcode' => 'required',
         'description' => 'required',
         'stock' => 'required',
         'price' => 'required',
@@ -29,7 +30,7 @@ class CreateProduct extends Component
             $this->create = true;
         } else {
             $this->create = false;
-            $this->reset(['name', 'description', 'stock', 'price', 'status', 'categoria_id']);
+            $this->reset(['name', 'barcode', 'description', 'stock', 'price', 'status', 'categoria_id']);
         }
     }
 
@@ -40,6 +41,7 @@ class CreateProduct extends Component
         $producto = new Producto();
 
         $producto->name = $this->name;
+        $producto->barcode = $this->barcode;
         $producto->description = $this->description;
         $producto->stock = $this->stock;
         $producto->price = $this->price;
@@ -47,7 +49,7 @@ class CreateProduct extends Component
         $producto->categoria_id = $this->categoria_id;
 
         $producto->save();
-        $this->reset(['name', 'description', 'stock', 'price', 'categoria_id', 'status']);
+        $this->reset(['name','barcode', 'description', 'stock', 'price', 'categoria_id', 'status']);
         $this->emit('render');
     }
 

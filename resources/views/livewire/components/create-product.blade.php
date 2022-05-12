@@ -18,7 +18,9 @@
                     <x-jet-input-error for="name"></x-jet-input-error>
                 </div>
                 <div>
-
+                    <x-jet-label>Codigo de barras:</x-jet-label>
+                    {!! Form::number('barcode', null, ['wire:model' => 'barcode', 'placeholder' => 'Precio del producto']) !!}
+                    <x-jet-input-error for="barcode"></x-jet-input-error>
                 </div>
                 <div>
                     <x-jet-label>Categoria:</x-jet-label>
