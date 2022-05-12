@@ -17,6 +17,7 @@ class CreateProductosTable extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
 
+            $table->string('barcode');
             $table->string('name');
             $table->string('description');
             $table->integer('stock');

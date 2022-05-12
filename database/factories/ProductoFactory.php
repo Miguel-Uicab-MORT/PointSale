@@ -15,12 +15,14 @@ class ProductoFactory extends Factory
      */
     public function definition()
     {
+        $barcode = $this->faker->ean8();
         $name = $this->faker->sentence(2);
         $stock = $this->faker->randomDigitNotNull();
         $categoria = Categoria::all()->random();
         $price = $this->faker->randomDigitNotNull();
 
         return [
+            'barcode' => $barcode,
             'name' => $name,
             'description' => $this->faker->sentence(5),
             'stock' => $stock,
