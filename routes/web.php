@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Category;
 use App\Http\Livewire\Components\EditUser;
@@ -15,10 +16,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
+Route::get('/dashboard', HomeController::class)->middleware('auth')->can('dashboard')->name('dashboard');
 
 Route::get('Category', Category::class)->middleware('auth')->can('category.index')->name('category.index');
 
