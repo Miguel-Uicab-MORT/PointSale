@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Category;
+use App\Http\Livewire\Components\EditUser;
 use App\Http\Livewire\Inventory;
 use App\Http\Livewire\PointSale;
 use App\Http\Livewire\Reports;
@@ -18,16 +20,22 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('Category', Category::class)->middleware('auth')->name('category.index');
+Route::get('Category', Category::class)->middleware('auth')->can('category.index')->name('category.index');
 
-Route::get('Inventory', Inventory::class)->middleware('auth')->name('inventory.index');
+Route::get('Inventory', Inventory::class)->middleware('auth')->can('inventory.index')->name('inventory.index');
 
-Route::get('PointSale', PointSale::class)->middleware('auth')->name('pointsale.create');
+Route::get('PointSale', PointSale::class)->middleware('auth')->can('pointsale.create')->name('pointsale.create');
 
-Route::get('Reports', Reports::class)->middleware('auth')->name('reports.index');
+Route::get('Reports', Reports::class)->middleware('auth')->can('reports.index')->name('reports.index');
 
-Route::get('Users', Users::class)->middleware('auth')->name('users.index');
+Route::get('Users', Users::class)->middleware('auth')->can('users.index')->name('users.index');
 
-Route::get('Roles', Roles::class)->middleware('auth')->name('roles.index');
+Route::get('user/edit/{user}', EditUser::class)->middleware('auth')->can('users.edit')->name('users.edit');
+
+Route::put('user/edit/{user}/role', [UserController::class, 'updateRole'])->middleware('auth')->can('users.update.role')->name('users.update.role');
+
+Route::put('user/edit/{user}/permission', [UserController::class, 'updatePermission'])->middleware('auth')->can('users.update.permission')->name('users.update.permission');
+
+Route::get('Roles', Roles::class)->middleware('auth')->can('roles.index')->name('roles.index');
 
 

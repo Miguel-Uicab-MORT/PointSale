@@ -1,3 +1,7 @@
 <div>
-    {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
+
+    <x-jet-button wire:click='create'>
+        Añadir Usuario
+    </x-jet-button>
+
 </div>

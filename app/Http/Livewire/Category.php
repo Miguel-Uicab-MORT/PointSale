@@ -28,8 +28,7 @@ class Category extends Component
 
     public function edit(Categoria $categoria)
     {
-        $this->$categoria = $categoria;
-
+        $this->categoria = $categoria;
         $this->validate();
 
         if ($this->edit == false) {

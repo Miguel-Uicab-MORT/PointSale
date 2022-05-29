@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Components;
 
+use App\Models\Producto;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 
@@ -9,12 +10,13 @@ class UpdateQty extends Component
 {
     protected $listeners = ['render' => 'render'];
 
-    public $rowId, $qty;
+    public $rowId, $qty, $product;
 
     public function mount()
     {
         $item = Cart::get($this->rowId);
         $this->qty = $item->qty;
+        $this->product = Producto::find($item->id);
     }
 
     public function addItem()

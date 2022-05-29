@@ -1,5 +1,5 @@
-<div class="container mx-auto grid grid-cols-3 gap-6">
-    <section class="col-span-2">
+<div class="container grid grid-cols-1 gap-3 mx-auto mt-3 bg-gray-100 md:grid-cols-3">
+    <section class="md:col-span-2">
     @livewire('components.search-product')
     </section>
     <section>

@@ -12,9 +12,18 @@
         </strong>
     </span>
 
-    <button wire:loading.attr="disabled" wire:target="removeItem" wire:click="addItem">
-        <strong class="text-xl ">
-            +
-        </strong>
-    </button>
+    @if ($qty < $product->stock)
+        <button wire:loading.attr="disabled" wire:target="removeItem" wire:click="addItem">
+            <strong class="text-xl ">
+                +
+            </strong>
+        </button>
+    @else
+        <button disabled>
+            <strong class="text-xl ">
+                +
+            </strong>
+        </button>
+    @endif
+
 </div>

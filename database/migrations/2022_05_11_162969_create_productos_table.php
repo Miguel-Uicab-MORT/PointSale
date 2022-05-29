@@ -20,7 +20,9 @@ class CreateProductosTable extends Migration
             $table->string('barcode');
             $table->string('name');
             $table->string('description');
+            $table->string('slug');
             $table->integer('stock');
+            $table->float('cost');
             $table->float('price');
             $table->enum('status', [Producto::Activo, Producto::Inactivo])->default(Producto::Inactivo);
 

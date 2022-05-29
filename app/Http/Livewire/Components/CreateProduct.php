@@ -4,25 +4,53 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Categoria;
 use App\Models\Producto;
+use Illuminate\Support\Str;
 use Livewire\Component;
+use Ramsey\Uuid\Generator\RandomGeneratorFactory;
 
 class CreateProduct extends Component
 {
-
     public $create = false;
     public $producto, $categorias, $statusList;
-    public $name, $barcode, $description, $stock, $price, $status, $categoria_id;
+    public $categoria_id, $name, $slug, $description, $cost, $price, $stock, $status, $barcode;
 
     protected $rules = [
-        'name' => 'required',
-        'barcode' => 'required',
-        'description' => 'required',
-        'stock' => 'required',
-        'price' => 'required',
         'categoria_id' => 'required',
-        'status' => 'required'
+        'name' => 'required',
+        'slug' => 'required|unique:productos,slug',
+        'description' => 'required',
+        'cost' => 'required',
+        'price' => 'required',
+        'stock' => 'required',
+        'status' => 'required',
+        'barcode' => 'required|unique:productos,barcode',
     ];
 
+    public function updatedName($value)
+    {
+        $this->slug = Str::slug($value);
+    }
+
+    public function barCodeGenerated()
+    {
+        $suma = 0;
+        for ($i=0; $i < 7; $i++) {
+            $digit = random_int(1,9);
+            $this->barcode = $this->barcode . $digit;
+            if ($i==0 or $i==2 or $i==4 or $i==6) {
+                $suma += $digit*3;
+            }else {
+                $suma += $digit;
+            }
+        }
+        $nctrl = round($suma, -1);
+        if ($nctrl < $suma) {
+            $nctrl = $nctrl + 10;
+        }
+        $nctrl = $nctrl - $suma;
+
+        $this->barcode = $this->barcode . $nctrl;
+    }
 
     public function create()
     {
@@ -30,26 +58,30 @@ class CreateProduct extends Component
             $this->create = true;
         } else {
             $this->create = false;
-            $this->reset(['name', 'barcode', 'description', 'stock', 'price', 'status', 'categoria_id']);
+            $this->reset(['categoria_id', 'name', 'slug', 'description', 'cost', 'price', 'stock', 'status', 'barcode']);
         }
     }
 
     public function store()
     {
+        $this->barCodeGenerated();
         $this->validate();
 
         $producto = new Producto();
 
-        $producto->name = $this->name;
-        $producto->barcode = $this->barcode;
-        $producto->description = $this->description;
-        $producto->stock = $this->stock;
-        $producto->price = $this->price;
-        $producto->status = $this->status;
+
         $producto->categoria_id = $this->categoria_id;
+        $producto->name = $this->name;
+        $producto->slug = $this->slug;
+        $producto->description = $this->description;
+        $producto->cost = $this->cost;
+        $producto->price = $this->price;
+        $producto->stock = $this->stock;
+        $producto->status = $this->status;
+        $producto->barcode = $this->barcode;
 
         $producto->save();
-        $this->reset(['name','barcode', 'description', 'stock', 'price', 'categoria_id', 'status']);
+        $this->reset(['categoria_id', 'name', 'slug', 'description', 'cost', 'price', 'stock', 'status', 'barcode']);
         $this->emit('render');
     }
 

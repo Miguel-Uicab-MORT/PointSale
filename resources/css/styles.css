@@ -17,3 +17,12 @@
 .tables tfoot{
     @apply bg-gray-300;
 }
+
+.form-input{
+    @apply border-gray-300 rounded-md shadow-sm w-full;
+}
+
+.form-input:focus{
+    @apply border-indigo-300 ring ring-indigo-200 ring-opacity-50;
+}
+

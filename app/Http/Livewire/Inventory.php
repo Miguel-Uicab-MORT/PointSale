@@ -12,7 +12,7 @@ class Inventory extends Component
     use WithPagination;
 
     public $search;
-    public $producto, $categorias, $statusList;
+    public $producto, $categorias, $statusList, $barcode;
     public $edit = false;
 
     protected $listeners = ['render' => 'render'];
@@ -21,7 +21,9 @@ class Inventory extends Component
         'producto.barcode' => 'required',
         'producto.name' => 'required',
         'producto.description' => 'required',
+        'producto.slug' => 'required',
         'producto.stock' => 'required',
+        'producto.cost' => 'required',
         'producto.price' => 'required',
         'producto.status' => 'required',
         'producto.categoria_id' => 'required'
@@ -35,6 +37,7 @@ class Inventory extends Component
     public function edit(Producto $producto)
     {
         $this->producto = $producto;
+        $this->barcode = $this->producto->barcode;
         $this->validate();
 
         if ($this->edit == false) {

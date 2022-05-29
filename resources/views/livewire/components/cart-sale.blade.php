@@ -1,6 +1,6 @@
 <div class="px-3 py-6">
     @if (Cart::count())
-        <table class="tables w-full">
+        <table class="w-full tables">
             <thead>
                 <th>Cantidad</th>
                 <th>Nombre</th>
@@ -13,8 +13,8 @@
                     <tr>
 
                         <td class="text-center">
-                            <span>
-                                @livewire('components.update-qty', ['rowId' => $item->rowId], key($item->rowId))
+                            <span class="font-bold">
+                                {{$item->qty}}
                             </span>
                         </td>
                         <td>
@@ -27,7 +27,7 @@
                                 <b>$</b>{{ number_format($item->price, 2, '.', ',') }}
                             </span>
                         </td>
-                        <td class="text-center font-bold">
+                        <td class="font-bold text-center">
                             <span>
                                 <b>$</b>{{ number_format($item->price * $item->qty, 2, '.', ',') }}
                             </span>
@@ -45,30 +45,30 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3" class="text-center font-bold">
-                        <div class=" text-lg">
+                    <td colspan="3" class="font-bold text-center">
+                        <div class="text-lg ">
                             <span>
                                 Total
                             </span>
                         </div>
                     </td>
-                    <td colspan="2" class="text-center font-bold">
-                        <div class=" text-lg">
+                    <td colspan="2" class="font-bold text-center">
+                        <div class="text-lg ">
                             <span>
-                                ${{ Cart::subtotal() }}
+                                ${{Cart::subtotal()}}
                             </span>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="text-center font-bold">
+                    <td colspan="5" class="font-bold text-center">
                         @livewire('components.payment-sale')
                     </td>
                 </tr>
             </tfoot>
         </table>
     @else
-        <table class="tables w-full">
+        <table class="w-full tables">
             <thead>
                 <th>Cantidad</th>
                 <th>Nombre</th>
@@ -80,7 +80,7 @@
                 <tr>
                     <td colspan="5">
                         <div class="py-3 text-center">
-                            <span class="text-lg text font-bold text-gray-700">TU CARRITO ESTÁ VACÍO</span>
+                            <span class="text-lg font-bold text-gray-700 text">TU CARRITO ESTÁ VACÍO</span>
                         </div>
                     </td>
                 </tr>

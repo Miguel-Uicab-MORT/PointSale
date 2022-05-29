@@ -32,7 +32,7 @@
                         {{ __('Reportes') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
+                    <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index','users.edit')">
                         {{ __('Empleados') }}
                     </x-jet-nav-link>
 
