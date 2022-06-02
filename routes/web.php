@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarcodeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Category;
@@ -13,14 +14,9 @@ use App\Http\Livewire\ShowSale;
 use App\Http\Livewire\Users;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', HomeController::class)->name('home');
 
-
-Route::get('dashboard', HomeController::class)->middleware('auth')->can('dashboard')->name('dashboard');
-
-Route::get('barcodes', [BarcodeController::class, 'printBarcode'])->middleware('auth')->can('inventory.index')->name('inventory.index');
+Route::get('dashboard', DashboardController::class)->middleware('auth')->can('dashboard')->name('dashboard');
 
 Route::get('Category', Category::class)->middleware('auth')->can('category.index')->name('category.index');
 
@@ -30,7 +26,7 @@ Route::get('PointSale', PointSale::class)->middleware('auth')->can('pointsale.cr
 
 Route::get('Reports', Reports::class)->middleware('auth')->can('reports.index')->name('reports.index');
 
-Route::get('Reports/{venta}', ShowSale::class)->middleware('auth')->can('reports.index')->name('reports.show');
+Route::get('Reports/{venta}', ShowSale::class)->middleware('auth')->can('reports.show')->name('reports.show');
 
 Route::get('Users', Users::class)->middleware('auth')->can('users.index')->name('users.index');
 

@@ -44,15 +44,21 @@
             <th>
                 Ganancia
             </th>
+            @can('reports.print')
             <th>
                 Ticket
             </th>
-            <th>
-                Detalles
-            </th>
-            <th>
-                Eliminar
-            </th>
+            @endcan
+            @can('reports.show')
+                <th>
+                    Detalles
+                </th>
+            @endcan
+            @can('reports.delete')
+                <th>
+                    Eliminar
+                </th>
+            @endcan
         </thead>
         <tbody>
             @foreach ($ventas as $venta)
@@ -61,7 +67,7 @@
                         {{ $venta->id }}
                     </td>
                     <td>
-                        {{Date::parse($venta->created_at)->locale('es')->format('l j F Y H:i:s')}}
+                        {{ Date::parse($venta->created_at)->locale('es')->format('l j F Y H:i:s') }}
                     </td>
                     <td class="font-bold text-center">
                         <b>$</b>{{ number_format($venta->costo, 2, '.', ',') }}
@@ -72,27 +78,33 @@
                     <td class="font-bold text-center">
                         <b>$</b>{{ number_format($venta->ganancia, 2, '.', ',') }}
                     </td>
+                    @can('reports.print')
                     <td>
                         <div class="flex justify-center">
-                            <x-jet-button wire:click='printTicket({{$venta}})'>
+                            <x-jet-button wire:click='printTicket({{ $venta }})'>
                                 <i class="text-xl fas fa-print"></i>
                             </x-jet-button>
                         </div>
                     </td>
+                    @endcan
+                    @can('reports.show')
                     <td>
                         <div class="flex justify-center">
-                            <x-jet-secondary-button wire:click='show({{$venta}})'>
+                            <x-jet-secondary-button wire:click='show({{ $venta }})'>
                                 <i class="text-xl fas fa-info"></i>
                             </x-jet-secondary-button>
                         </div>
                     </td>
-                    <td>
-                        <div class="flex justify-center">
-                            <x-jet-danger-button wire:click='delete({{ $venta }})'>
-                                <i class="text-xl fas fa-trash"></i>
-                            </x-jet-danger-button>
-                        </div>
-                    </td>
+                    @endcan
+                    @can('reports.delete')
+                        <td>
+                            <div class="flex justify-center">
+                                <x-jet-danger-button wire:click='delete({{ $venta }})'>
+                                    <i class="text-xl fas fa-trash"></i>
+                                </x-jet-danger-button>
+                            </div>
+                        </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

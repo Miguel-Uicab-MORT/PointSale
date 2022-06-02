@@ -43,7 +43,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'pointsale.create', 'description' => 'Acceder al Punto de Venta'])->syncRoles([$role1, $role2]);
 
         /**PERMISOS PARA ACCEDER A LOS REPORTES*/
-        Permission::create(['name' => 'reports.index', 'description' => 'Acceder a los Reportes'])->syncRoles([$role1]);
+        Permission::create(['name' => 'reports.index', 'description' => 'Acceder a la lista de Reportes'])->syncRoles([$role1]);
+        Permission::create(['name' => 'reports.show', 'description' => 'Acceder a ver venta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'reports.delete', 'description' => 'Eliminar venta'])->syncRoles([$role1]);
+        Permission::create(['name' => 'reports.print', 'description' => 'Imprimir tickets de venta'])->syncRoles([$role1]);
 
         /**PERMISOS PARA AMINISTRAR A LOS USUARIOS*/
         Permission::create(['name' => 'users.index', 'description' => 'Acceder a lista de Empleados'])->syncRoles([$role1]);
