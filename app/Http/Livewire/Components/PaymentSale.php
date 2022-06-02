@@ -54,8 +54,8 @@ class PaymentSale extends Component
         $this->validate();
 
         foreach (Cart::content() as $item) {
-            $this->costo += $item->options->cost;
-            $this->ganancia += $item->options->gain;
+            $this->costo += $item->options->cost * $item->qty;
+            $this->ganancia += $item->options->gain * $item->qty;
         }
 
         $this->cambio = $this->recibido - Cart::subtotal();
