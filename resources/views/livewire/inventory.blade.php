@@ -1,4 +1,4 @@
-<div class="container mx-auto p-3">
+<div class="container p-3 mx-auto">
 
     <div class="flex items-center p-3">
         <div class="flex items-center flex-1">
@@ -67,14 +67,19 @@
                             <b>$</b>{{ number_format($producto->price, 2, '.', ',') }}
                         </td>
                         <td class="flex justify-end">
+                            <div class="flex justify-center">
+                                <x-jet-button wire:click='printBarcode({{ $producto }})'>
+                                    <i class="text-xl fas fa-print"></i>
+                                </x-jet-button>
+                            </div>
                             @can('product.edit')
-                                <x-jet-secondary-button wire:click='edit({{ $producto }})'>
-                                    Editar
+                                <x-jet-secondary-button class="ml-1" wire:click='edit({{ $producto }})'>
+                                    <i class="text-xl fas fa-edit"></i>
                                 </x-jet-secondary-button>
                             @endcan
                             @can('product.delete')
                                 <x-jet-danger-button class="ml-1" wire:click='delete({{ $producto }})'>
-                                    Borrar
+                                    <i class="text-xl fas fa-trash"></i>
                                 </x-jet-danger-button>
                             @endcan
                         </td>
@@ -147,9 +152,19 @@
                     <x-jet-input-error for="producto.barcode"></x-jet-input-error>
                 </div>
                 @if ($barcode != null)
-                    <div class="flex items-center justify-center">
-                        {!! DNS1D::getBarcodeHTML($barcode, 'EAN8') !!}
-                    </div>
+                    @if (strlen($barcode) == 8)
+                        <div class="flex items-center justify-center">
+                            {!! DNS1D::getBarcodeHTML($barcode, 'EAN8') !!}
+                        </div>
+                    @elseif (strlen($barcode) == 13)
+                        <div class="flex items-center justify-center">
+                            {!! DNS1D::getBarcodeHTML($barcode, 'EAN13') !!}
+                        </div>
+                    @elseif (strlen($barcode) == 12)
+                        <div class="flex items-center justify-center">
+                            {!! DNS1D::getBarcodeHTML($barcode, 'UPCA') !!}
+                        </div>
+                    @endif
                 @endif
 
             </div>

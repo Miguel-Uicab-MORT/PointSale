@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BarcodeController extends Controller
 {
@@ -12,8 +12,9 @@ class BarcodeController extends Controller
     {
         $productos = Producto::all();
 
-        $pdf = PDF::loadview('print.barcode', compact('productos'));
+        $pdf = PDf::loadview('print.barcode', compact('productos'));
 
         return $pdf->stream();
+        //return view('print.barcode', compact('productos'));
     }
 }

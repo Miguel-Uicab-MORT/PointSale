@@ -6,6 +6,8 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
 
 class Inventory extends Component
 {
@@ -57,7 +59,6 @@ class Inventory extends Component
         $this->edit = false;
 
         $this->emit('render');
-
     }
 
     public function delete(Producto $producto)
@@ -71,6 +72,24 @@ class Inventory extends Component
     {
         $this->categorias = Categoria::pluck('name', 'id');
         $this->statusList = ['1' => 'Activo', '2' => 'Inactivo'];
+    }
+
+    public function printBarcode(Producto $producto)
+    {
+        $nombreImpresora = "MINIPRINT";
+        $connector = new WindowsPrintConnector($nombreImpresora);
+        $impresora = new Printer($connector);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->text("-------------------------------\n");
+        if (strlen($producto->barcode) == 8) {
+            $impresora->barcode($producto->barcode, Printer::BARCODE_JAN8);
+        } elseif (strlen($producto->barcode) == 13) {
+            $impresora->barcode($producto->barcode, Printer::BARCODE_JAN13);
+        } elseif (strlen($producto->barcode) == 12) {
+            $impresora->barcode($producto->barcode, Printer::BARCODE_UPCA);
+        }
+        $impresora->text("-------------------------------\n");
+        $impresora->close();
     }
 
     public function render()

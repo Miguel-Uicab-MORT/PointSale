@@ -35,7 +35,7 @@
                     @endcan
 
                     @can('reports.index')
-                        <x-jet-nav-link href="{{ route('reports.index') }}" :active="request()->routeIs('reports.index')">
+                        <x-jet-nav-link href="{{ route('reports.index') }}" :active="request()->routeIs('reports.index', 'reports.show')">
                             {{ __('Reportes') }}
                         </x-jet-nav-link>
                     @endcan

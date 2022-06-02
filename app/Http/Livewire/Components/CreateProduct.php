@@ -13,6 +13,7 @@ class CreateProduct extends Component
     public $create = false;
     public $producto, $categorias, $statusList;
     public $categoria_id, $name, $slug, $description, $cost, $price, $stock, $status, $barcode;
+    public $exist_barcode = 2;
 
     protected $rules = [
         'categoria_id' => 'required',
@@ -64,11 +65,13 @@ class CreateProduct extends Component
 
     public function store()
     {
-        $this->barCodeGenerated();
+        if ($this->exist_barcode == 2) {
+            $this->barCodeGenerated();
+        }
+
         $this->validate();
 
         $producto = new Producto();
-
 
         $producto->categoria_id = $this->categoria_id;
         $producto->name = $this->name;
@@ -81,7 +84,7 @@ class CreateProduct extends Component
         $producto->barcode = $this->barcode;
 
         $producto->save();
-        $this->reset(['categoria_id', 'name', 'slug', 'description', 'cost', 'price', 'stock', 'status', 'barcode']);
+        $this->reset(['categoria_id', 'name', 'slug', 'description', 'cost', 'price', 'stock', 'status', 'barcode', 'create', 'exist_barcode']);
         $this->emit('render');
     }
 

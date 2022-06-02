@@ -1,3 +1,100 @@
-<div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
+<div class="p-3">
+    <section x-data="{ type_search: @entangle('type_search') }">
+
+        <div class="flex items-center hidden p-3" :class="{ 'hidden': type_search == 2 }">
+            <x-jet-input class="flex-1" wire:model="search" type="text" placeholder="Buscar venta" required
+                autofocus />
+        </div>
+        <div class="flex items-center hidden p-3" :class="{ 'hidden': type_search == 1 }">
+            <x-jet-input class="flex-1" wire:model="search" type="date" placeholder="Buscar venta" required
+                autofocus />
+        </div>
+        <div class="flex items-center p-3 mb-3 bg-white rounded-lg shadow-lg">
+            <div>
+                <label class="mr-2">
+                    <input value="1" type="radio" x-model="type_search" name="type_search">
+                    <span class="ml-2">
+                        {{ __('ID de venta') }}
+                    </span>
+                </label>
+                <label class="ml-2">
+                    <input value="2" type="radio" x-model="type_search" name="type_search">
+                    <span class="ml-2">
+                        {{ __('Fecha de venta') }}
+                    </span>
+                </label>
+            </div>
+        </div>
+    </section>
+
+    <table class="tables">
+        <thead>
+            <th>
+                Ticket
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Costo
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Ganancia
+            </th>
+            <th>
+                Ticket
+            </th>
+            <th>
+                Detalles
+            </th>
+            <th>
+                Eliminar
+            </th>
+        </thead>
+        <tbody>
+            @foreach ($ventas as $venta)
+                <tr>
+                    <td>
+                        {{ $venta->id }}
+                    </td>
+                    <td>
+                        {{Date::parse($venta->created_at)->locale('es')->format('l j F Y H:i:s')}}
+                    </td>
+                    <td class="font-bold text-center">
+                        <b>$</b>{{ number_format($venta->costo, 2, '.', ',') }}
+                    </td>
+                    <td class="font-bold text-center">
+                        <b>$</b>{{ number_format($venta->total, 2, '.', ',') }}
+                    </td>
+                    <td class="font-bold text-center">
+                        <b>$</b>{{ number_format($venta->ganancia, 2, '.', ',') }}
+                    </td>
+                    <td>
+                        <div class="flex justify-center">
+                            <x-jet-button wire:click='printTicket({{$venta}})'>
+                                <i class="text-xl fas fa-print"></i>
+                            </x-jet-button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex justify-center">
+                            <x-jet-secondary-button wire:click='show({{$venta}})'>
+                                <i class="text-xl fas fa-info"></i>
+                            </x-jet-secondary-button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex justify-center">
+                            <x-jet-danger-button wire:click='delete({{ $venta }})'>
+                                <i class="text-xl fas fa-trash"></i>
+                            </x-jet-danger-button>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 </div>

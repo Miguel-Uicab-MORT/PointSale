@@ -12,7 +12,7 @@ class SearchProduct extends Component
     public $search;
     public $alert = false;
     public $producto;
-    public $qty = 1;
+    public $qty = 1, $options = [];
     public $type_search = 1;
     public $selectSearch = 'barcode';
     protected $listeners = ['render' => 'render'];
@@ -27,6 +27,8 @@ class SearchProduct extends Component
         }elseif ($this->producto->stock < $this->qty) {
             $this->qty = $this->producto->stock;
         }
+        $this->options['cost'] = $this->producto->cost;
+        $this->options['gain'] = $this->producto->price - $this->producto->cost;
 
         Cart::add([
             'id' => $this->producto->id,
@@ -34,10 +36,11 @@ class SearchProduct extends Component
             'qty' => $this->qty,
             'price' => $this->producto->price,
             'weight' => 550,
+            'options' => $this->options
         ]);
 
         $this->qty = 1;
-        $this->emitTo('cart-sale','render');
+        $this->emit('render');
     }
 
     public function updatedTypeSearch($value)

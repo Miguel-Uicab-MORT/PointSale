@@ -16,7 +16,9 @@ class CreateVentasTable extends Migration
         Schema::create('ventas', function (Blueprint $table) {
             $table->id();
 
+            $table->float('costo');
             $table->float('total');
+            $table->float('ganancia');
             $table->float('recibido');
             $table->float('cambio');
             $table->json('content');

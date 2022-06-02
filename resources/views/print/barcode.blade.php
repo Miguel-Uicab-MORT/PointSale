@@ -1,35 +1,40 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Códigos de barras') }}</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            gap: 10px;
+            padding: 5px;
+        }
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        .grid-container>div {
+            border: 1px solid black;
+            text-align: center;
+            font-size: 20px;
+        }
 
-    @livewireStyles
-
-    <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
+    </style>
 </head>
 
-<body class="font-sans antialiased">
-    @foreach ($productos as $producto)
-        <h2>
-            {{ $producto->name }}
-        </h2>
-        <div class="flex items-center justify-center">
-            {!! DNS1D::getBarcodeHTML($producto->barcode, 'EAN8') !!}
-        </div>
-    @endforeach
-
+<body>
+    <div class="grid-container">
+        @foreach ($productos as $producto)
+            <div>
+                <h4>
+                    {{ $producto->name }}
+                </h4>
+                <div style="text-align: center;">
+                    {!! DNS1D::getBarcodeHTML($producto->barcode, 'EAN8') !!}
+                </div>
+            </div>
+        @endforeach
+    </div>
 </body>
 
 </html>
