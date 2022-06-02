@@ -82,13 +82,17 @@ class Inventory extends Component
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->text("-------------------------------\n");
         if (strlen($producto->barcode) == 8) {
+            $impresora->text($producto->name . "\n");
             $impresora->barcode($producto->barcode, Printer::BARCODE_JAN8);
         } elseif (strlen($producto->barcode) == 13) {
+            $impresora->text($producto->name . "\n");
             $impresora->barcode($producto->barcode, Printer::BARCODE_JAN13);
         } elseif (strlen($producto->barcode) == 12) {
+            $impresora->text($producto->name . "\n");
             $impresora->barcode($producto->barcode, Printer::BARCODE_UPCA);
         }
         $impresora->text("-------------------------------\n");
+        $impresora->feed(3);
         $impresora->close();
     }
 
