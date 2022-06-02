@@ -32,7 +32,8 @@ class ShowSale extends Component
         $impresora->text("9811385479\n");
         $impresora->text("-------------------------------\n");
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
-        $impresora->text("Cajero:" . auth()->user()->name . "\n");
+        $impresora->text("Cajero:" . auth()->user()->name. "\n");
+        $impresora->text("Ticket: " . $venta->id . "\n");
         $impresora->text($venta->created_at . "\n");
         $impresora->text("-------------------------------\n");
 
