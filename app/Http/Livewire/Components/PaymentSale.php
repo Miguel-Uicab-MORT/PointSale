@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Producto;
 use App\Models\Venta;
+use EscposImageTest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Mike42\Escpos\EscposImage;
@@ -95,10 +96,8 @@ class PaymentSale extends Component
     {
         $nombreImpresora = "MINIPRINT";
         $connector = new WindowsPrintConnector($nombreImpresora);
-        $logo = EscposImage::load("img/logo-v2.png", false);
         $impresora = new Printer($connector);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
-        $impresora->graphics($logo);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setEmphasis(true);
         $impresora->text("Ticket de venta\n");
