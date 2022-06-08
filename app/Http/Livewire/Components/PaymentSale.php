@@ -96,8 +96,10 @@ class PaymentSale extends Component
     {
         $nombreImpresora = "MINIPRINT";
         $connector = new WindowsPrintConnector($nombreImpresora);
+        $logo = EscposImage::load("img/logo-ticket.png");
         $impresora = new Printer($connector);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->bitImageColumnFormat($logo);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setEmphasis(true);
         $impresora->text("Ticket de venta\n");

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Venta;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Mike42\Escpos\EscposImage;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\Printer;
 
@@ -25,7 +26,10 @@ class Reports extends Component
     {
         $nombreImpresora = "MINIPRINT";
         $connector = new WindowsPrintConnector($nombreImpresora);
+        $logo = EscposImage::load("img/logo-ticket.png");
         $impresora = new Printer($connector);
+        $impresora->setJustification(Printer::JUSTIFY_CENTER);
+        $impresora->bitImageColumnFormat($logo);
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setEmphasis(true);
         $impresora->text("Ticket de venta\n");
