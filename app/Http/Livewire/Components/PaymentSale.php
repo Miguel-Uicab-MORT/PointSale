@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Components;
 
 use App\Models\Producto;
 use App\Models\Venta;
-use EscposImageTest;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Livewire\Component;
 use Mike42\Escpos\EscposImage;
