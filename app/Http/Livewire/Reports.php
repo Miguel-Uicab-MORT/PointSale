@@ -37,7 +37,7 @@ class Reports extends Component
         $impresora->setEmphasis(false);
         $impresora->text("Col. 20 de noviembre, C. Francisco Imadero Entre Pino Suárez, CP: 24085\n");
         $impresora->text("ruizgarciajoseignacio7@gmail.com\n");
-        $impresora->text("9811385479\n");
+        $impresora->text("Cotizaciones: 9811385479\n");
         $impresora->text("-------------------------------\n");
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->text("Cajero:" . auth()->user()->name. "\n");
