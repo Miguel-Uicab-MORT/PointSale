@@ -5,7 +5,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Category;
+use App\Http\Livewire\Client;
 use App\Http\Livewire\Components\EditUser;
+use App\Http\Livewire\Factura;
 use App\Http\Livewire\Inventory;
 use App\Http\Livewire\PointSale;
 use App\Http\Livewire\Reports;
@@ -37,5 +39,7 @@ Route::put('user/edit/{user}/role', [UserController::class, 'updateRole'])->midd
 Route::put('user/edit/{user}/permission', [UserController::class, 'updatePermission'])->middleware('auth')->can('users.update.permission')->name('users.update.permission');
 
 Route::get('Roles', Roles::class)->middleware('auth')->can('roles.index')->name('roles.index');
+
+Route::get('clients', Client::class)->middleware('auth')->name('client.index');
 
 

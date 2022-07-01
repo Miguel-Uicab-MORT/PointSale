@@ -2,8 +2,7 @@
     <section x-data="{ type_search: @entangle('type_search') }">
 
         <div class="flex items-center hidden p-3" :class="{ 'hidden': type_search == 2 }">
-            <x-jet-input class="flex-1" wire:model="search" type="text" placeholder="Buscar venta" required
-                autofocus />
+            <x-jet-input class="flex-1" wire:model="search" type="text" placeholder="Buscar venta" required autofocus />
         </div>
         <div class="flex items-center hidden p-3" :class="{ 'hidden': type_search == 1 }">
             <x-jet-input class="flex-1" wire:model="search" type="date" placeholder="Buscar venta" required
@@ -45,9 +44,9 @@
                 Ganancia
             </th>
             @can('reports.print')
-            <th>
-                Ticket
-            </th>
+                <th>
+                    Ticket
+                </th>
             @endcan
             @can('reports.show')
                 <th>
@@ -79,22 +78,25 @@
                         <b>$</b>{{ number_format($venta->ganancia, 2, '.', ',') }}
                     </td>
                     @can('reports.print')
-                    <td>
-                        <div class="flex justify-center">
-                            <x-jet-button wire:click='printTicket({{ $venta }})'>
-                                <i class="text-xl fas fa-print"></i>
-                            </x-jet-button>
-                        </div>
-                    </td>
+                        <td>
+                            <div class="flex justify-center">
+                                <x-jet-button wire:click='printTicket({{ $venta }})'>
+                                    <i class="text-xl fas fa-print"></i>
+                                </x-jet-button>
+                            </div>
+                        </td>
                     @endcan
                     @can('reports.show')
-                    <td>
-                        <div class="flex justify-center">
-                            <x-jet-secondary-button wire:click='show({{ $venta }})'>
-                                <i class="text-xl fas fa-info"></i>
-                            </x-jet-secondary-button>
-                        </div>
-                    </td>
+                        <td>
+                            <div class="flex justify-center">
+                                <x-jet-secondary-button wire:click='SelectCliente({{$venta}})'>
+                                    <i class="text-xl fas fa-info"></i>
+                                </x-jet-secondary-button>
+                                <x-jet-secondary-button wire:click='show({{ $venta }})'>
+                                    <i class="text-xl fas fa-info"></i>
+                                </x-jet-secondary-button>
+                            </div>
+                        </td>
                     @endcan
                     @can('reports.delete')
                         <td>
@@ -109,4 +111,29 @@
             @endforeach
         </tbody>
     </table>
+
+    <x-jet-dialog-modal wire:model='selectCliente'>
+
+        <x-slot name="title">
+            Editar Cliente
+        </x-slot>
+        <x-slot name="content">
+            {!! Form::open() !!}
+            <div>
+                <x-jet-label>Categoria:</x-jet-label>
+                {!! Form::select('idClient', $clientes, null, ['wire:model' => 'idClient', 'placeholder' => 'Elija una opción', 'class' => 'form-input']) !!}
+                <x-jet-input-error for="idClient"></x-jet-input-error>
+            </div>
+            {!! Form::close() !!}
+        </x-slot>
+        <x-slot name="footer">
+            <x-jet-secondary-button class="mr-3" wire:click='selectCliente({{ $venta }})'>
+                Cancelar
+            </x-jet-secondary-button>
+            <x-jet-button wire:click='createFactura'>
+                Facturar
+            </x-jet-button>
+        </x-slot>
+
+    </x-jet-dialog-modal>
 </div>

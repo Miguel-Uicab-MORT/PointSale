@@ -5,12 +5,12 @@
         </h2>
     </x-slot>
 
-    <div class="grid grid-cols-1 gap-1 mt-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-3 lg:gap-6">
+    <div class="grid grid-cols-1 gap-1 mt-6 sm:grid-cols-2 lg:grid-cols-4 sm:gap-3 lg:gap-6">
         @can('category.index')
             <a href="{{ route('category.index') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/6.png" class="object-cover w-60" alt="">
+                        <img src="/img/6.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
@@ -24,7 +24,7 @@
             <a href="{{ route('inventory.index') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/1.png" class="object-cover w-60" alt="">
+                        <img src="/img/1.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
@@ -38,7 +38,7 @@
             <a href="{{ route('pointsale.create') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/2.png" class="object-cover w-60" alt="">
+                        <img src="/img/2.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
@@ -48,15 +48,27 @@
                 </div>
             </a>
         @endcan
+            <a href="{{ route('client.index') }}">
+                <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
+                    <div class="flex justify-center">
+                        <img src="/img/clients.png" class="object-cover w-40" alt="">
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
+                            Clientes
+                        </h1>
+                    </div>
+                </div>
+            </a>
         @can('reports.index')
             <a href="{{ route('reports.index') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/3.png" class="object-cover w-60" alt="">
+                        <img src="/img/3.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
-                            Reportes
+                            Ventas
                         </h1>
                     </div>
                 </div>
@@ -66,7 +78,7 @@
             <a href="{{ route('users.index') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/4.png" class="object-cover w-60" alt="">
+                        <img src="/img/4.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">
@@ -80,7 +92,7 @@
             <a href="{{ route('roles.index') }}">
                 <div class="p-3 bg-white rounded-lg shadow-xl hover:bg-gray-300">
                     <div class="flex justify-center">
-                        <img src="/img/5.png" class="object-cover w-60" alt="">
+                        <img src="/img/5.png" class="object-cover w-40" alt="">
                     </div>
                     <div>
                         <h1 class="text-xl font-semibold leading-tight text-center text-gray-800">

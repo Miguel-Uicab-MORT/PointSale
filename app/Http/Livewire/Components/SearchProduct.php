@@ -29,6 +29,7 @@ class SearchProduct extends Component
         }
         $this->options['cost'] = $this->producto->cost;
         $this->options['gain'] = $this->producto->price - $this->producto->cost;
+        $this->options['barcode'] = $this->producto->barcode;
 
         Cart::add([
             'id' => $this->producto->id,

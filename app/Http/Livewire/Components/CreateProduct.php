@@ -34,6 +34,8 @@ class CreateProduct extends Component
 
     public function barCodeGenerated()
     {
+        $this->reset('barcode');
+
         $suma = 0;
         for ($i=0; $i < 7; $i++) {
             $digit = random_int(1,9);
